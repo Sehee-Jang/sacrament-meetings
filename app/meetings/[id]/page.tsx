@@ -1,5 +1,5 @@
 import MeetingDetail from "@/app/components/MeetingDetail";
-import { getMeetingById } from "@/lib/meetings-db";
+import { SacramentMeeting } from "@/lib/types";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -8,29 +8,26 @@ interface PageProps {
   }>;
 }
 
+async function getMeeting(id: string) {
+  const response = await fetch(`http://localhost:3000/api/meetings/${id}`, {
+    cache: "no-store",
+  });
 
-export default async function MeetingDetailPage({
-  params,
-}: PageProps) {
+  if (response.status === 404) {
+    notFound();
+  }
 
+  if (!response.ok) {
+    throw new Error("Failed to fetch meeting");
+  }
+
+  return response.json() as Promise<SacramentMeeting>;
+}
+
+export default async function MeetingDetailPage({ params }: PageProps) {
   const { id } = await params;
 
-  const meetingId = Number(id);
+  const meeting = await getMeeting(id);
 
-  if (Number.isNaN(meetingId)) {
-    notFound();
-  }
-
-
-  const meeting = getMeetingById(meetingId);
-
-
-  if (!meeting) {
-    notFound();
-  }
-
-
-  return (
-    <MeetingDetail meeting={meeting} />
-  );
+  return <MeetingDetail meeting={meeting} />;
 }
