@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Header() {
   const today = new Date().toLocaleDateString("en-US", {
@@ -13,9 +14,16 @@ export default function Header() {
       <div className="container-page flex items-center justify-between py-4">
         <Link href="/">
           <h1 className="text-2xl font-bold text-blue-700">
-            Springfield Ward
+            Suji Ward
           </h1>
         </Link>
+
+        <Image
+            src="/logo.png"
+            alt="Ward logo"
+            width={48}
+            height={48}
+        />
 
         <p className="text-sm text-gray-600">{today}</p>
       </div>
