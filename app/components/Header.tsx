@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import NavLinks from "./NavLinks";
 
 export default function Header() {
   const today = new Date().toLocaleDateString("en-US", {
@@ -18,6 +19,7 @@ export default function Header() {
           </h1>
         </Link>
 
+        
         <Image
             src="/logo.png"
             alt="Ward logo"
@@ -25,6 +27,8 @@ export default function Header() {
             height={48}
         />
 
+        <NavLinks />
+        
         <p className="text-sm text-gray-600">{today}</p>
       </div>
     </header>

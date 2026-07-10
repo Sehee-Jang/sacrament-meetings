@@ -23,17 +23,24 @@ export default function NavLinks() {
 
   return (
     <nav className="flex gap-2">
-      {links.map((link) => (
-        <Link
-          key={link.href}
-          href={link.href}
-          className={`nav-link ${
-            pathname === link.href ? "active" : ""
-          }`}
-        >
-          {link.label}
-        </Link>
-      ))}
+      {links.map((link) => {
+        const active =
+          pathname === link.href ||
+          (link.href !== "/" &&
+            pathname.startsWith(link.href));
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`nav-link ${
+              active ? "active" : ""
+            }`}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }
