@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
 
   const date = searchParams.get("date");
 
-  const meetings = getMeetings(date ?? undefined);
+  const meetings = await getMeetings(date ?? undefined);
 
   return NextResponse.json(meetings);
 }

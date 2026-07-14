@@ -11,14 +11,23 @@ export default function Header() {
 
   return (
     <header className='border-b bg-white shadow-sm'>
-      <div className='container-page flex items-center justify-between py-4'>
-        <Link href='/'>
-          <h1 className='text-2xl font-bold text-blue-700'>Suji Ward</h1>
-        </Link>
+      <div className='container-page flex flex-col md:flex-row items-center justify-between py-4 px-4 md:px-6 gap-3 md:gap-0'>
+        <div className='flex flex-col items-center md:items-start'>
+          <Link href='/'>
+            <h1 className='text-2xl font-bold text-blue-700 tracking-tight'>
+              Suji Ward
+            </h1>
+          </Link>
+          {/* Mobile Only */}
+          <p className='text-[11px] text-gray-400 mt-0.5 md:hidden'>{today}</p>
+        </div>
 
         <NavLinks />
 
-        <p className='text-sm text-gray-600'>{today}</p>
+        {/* Desktop Only */}
+        <p className='hidden md:block text-sm text-gray-600 font-medium'>
+          {today}
+        </p>
       </div>
     </header>
   );

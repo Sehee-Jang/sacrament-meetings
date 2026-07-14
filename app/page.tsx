@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <section className='mx-auto max-w-6xl p-8'>
+    <section className='mx-auto max-w-6xl p-8 min-h-[500px]'>
       <div className='overflow-hidden rounded-xl bg-white shadow'>
         <Image
           src='/hero00.jpg'
