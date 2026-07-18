@@ -9,7 +9,12 @@ interface PageProps {
 }
 
 async function getMeeting(id: string) {
-  const response = await fetch(`http://localhost:3000/api/meetings/${id}`, {
+  const baseUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : `https://${process.env.VERCEL_URL}`;
+
+  const response = await fetch(`${baseUrl}/api/meetings/${id}`, {
     cache: "no-store",
   });
 
