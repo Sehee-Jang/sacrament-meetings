@@ -1,6 +1,6 @@
 import PageContainer from "@/app/components/PageContainer";
 
-export default function MeetingsLayout({
+export default function AdminMeetingsLayout({
   children,
 }: {
   children: React.ReactNode;

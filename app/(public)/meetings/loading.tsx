@@ -6,9 +6,9 @@ export default function Loading() {
 
       {/* Text */}
       <div className='text-center space-y-1'>
-        <p className='text-sm text-gray-500'>Loading...</p>  
+        <p className='text-sm text-gray-500'>Loading...</p>
         <p className='text-xs text-gray-400'>
-          Hang tight! We're putting everything together.
+          Hang tight! We&apos;re putting everything together.
         </p>
       </div>
     </div>
