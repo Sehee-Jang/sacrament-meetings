@@ -7,6 +7,8 @@ import {
 } from "./meetings-db";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
+import { AuthError } from "next-auth";
 
 const MeetingFormSchema = z.object({
   date: z.string().min(1, "Date is required."),
@@ -281,4 +283,27 @@ export async function deleteMeeting(id: number) {
   }
 
   redirect("/meetings");
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData,
+) {
+  try {
+    await signIn("credentials", formData, {
+      redirectTo: "/meetings",
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return "Invalid email or password.";
+
+        default:
+          return "Something went wrong.";
+      }
+    }
+
+    throw error;
+  }
 }

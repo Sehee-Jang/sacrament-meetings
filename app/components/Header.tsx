@@ -1,7 +1,11 @@
 import Link from "next/link";
 import NavLinks from "./NavLinks";
+import { auth } from "@/auth";
+import SignOutButton from "./SignOutButton";
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
+
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -22,7 +26,29 @@ export default function Header() {
           <p className='text-[11px] text-gray-400 mt-0.5 md:hidden'>{today}</p>
         </div>
 
-        <NavLinks />
+        <div className='flex items-center gap-4'>
+          <NavLinks />
+
+          {session?.user ? (
+            <>
+              <Link
+                href='/meetings/new'
+                className='text-sm font-medium text-blue-600 hover:text-blue-800'
+              >
+                New Meeting
+              </Link>
+
+              <SignOutButton />
+            </>
+          ) : (
+            <Link
+              href='/login'
+              className='text-sm font-medium text-blue-600 hover:text-blue-800'
+            >
+              Sign In
+            </Link>
+          )}
+        </div>
 
         {/* Desktop Only */}
         <p className='hidden md:block text-sm text-gray-600 font-medium'>
